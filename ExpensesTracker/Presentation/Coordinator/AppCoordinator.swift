@@ -28,9 +28,16 @@ final class AppCoordinator: Coordinator {
     }
     
     private func showMain() {
-       
-        let onboardingViewController = ViewController()
-        navigationController.viewControllers = [onboardingViewController]
+
+        let mainPageViewModel = MainPageViewModel(exchangeRateModel: .init())
+        let mainViewController = ViewController(viewModel: mainPageViewModel)
+        navigationController.viewControllers = [mainViewController]
+    }
+    
+    private func showAddTransaction() {
+        
+        
+        
     }
 }
 
