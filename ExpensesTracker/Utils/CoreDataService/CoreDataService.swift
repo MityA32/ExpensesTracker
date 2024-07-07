@@ -60,7 +60,6 @@ final class CoreDataService {
                 do {
                     try backgroundContext.save()
                 } catch {
-                    // error.record()
                     print(error)
                 }
             }
@@ -84,7 +83,7 @@ final class CoreDataService {
 }
 
 @propertyWrapper
-class Fetch<T: NSManagedObject> {
+final class Fetch<T: NSManagedObject> {
     
     var wrappedValue: [T] {
         if let filter {
