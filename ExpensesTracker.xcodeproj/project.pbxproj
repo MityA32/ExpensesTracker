@@ -33,6 +33,8 @@
 		93C133122C397859004DFDFF /* ExchangeRateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133112C397859004DFDFF /* ExchangeRateModel.swift */; };
 		93C133142C397916004DFDFF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133132C397916004DFDFF /* Date+Extension.swift */; };
 		93C133182C3A8992004DFDFF /* AddTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133172C3A8992004DFDFF /* AddTransactionViewModel.swift */; };
+		93C1331B2C3B2B01004DFDFF /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331A2C3B2B01004DFDFF /* AddTransactionView.swift */; };
+		93C1331E2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		93C133112C397859004DFDFF /* ExchangeRateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateModel.swift; sourceTree = "<group>"; };
 		93C133132C397916004DFDFF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		93C133172C3A8992004DFDFF /* AddTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewModel.swift; sourceTree = "<group>"; };
+		93C1331A2C3B2B01004DFDFF /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
+		93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +218,7 @@
 		93C132F82C37018D004DFDFF /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				93C1331C2C3B2C10004DFDFF /* Cells */,
 				93C133052C395183004DFDFF /* ExchangeRateView.swift */,
 				93C133072C395248004DFDFF /* TransactionsHistoryView.swift */,
 				93C133092C395263004DFDFF /* MainPageManageBalanceButtonsView.swift */,
@@ -257,6 +262,7 @@
 		93C133152C3A8930004DFDFF /* AddTransaction */ = {
 			isa = PBXGroup;
 			children = (
+				93C133192C3B2AF1004DFDFF /* Subviews */,
 				93C133162C3A8978004DFDFF /* ViewModel */,
 				93C1330F2C39609A004DFDFF /* AddTransactionViewController.swift */,
 			);
@@ -269,6 +275,22 @@
 				93C133172C3A8992004DFDFF /* AddTransactionViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		93C133192C3B2AF1004DFDFF /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				93C1331A2C3B2B01004DFDFF /* AddTransactionView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		93C1331C2C3B2C10004DFDFF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,8 +367,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93C1331B2C3B2B01004DFDFF /* AddTransactionView.swift in Sources */,
 				93C132E32C36F1C3004DFDFF /* BaseBackgroundUIViewController.swift in Sources */,
 				93C132F52C36FCA2004DFDFF /* APIEndpoints.swift in Sources */,
+				93C1331E2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift in Sources */,
 				93C133122C397859004DFDFF /* ExchangeRateModel.swift in Sources */,
 				93C133182C3A8992004DFDFF /* AddTransactionViewModel.swift in Sources */,
 				93C1330A2C395263004DFDFF /* MainPageManageBalanceButtonsView.swift in Sources */,

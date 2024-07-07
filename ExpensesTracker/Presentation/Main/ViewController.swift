@@ -8,15 +8,12 @@
 import UIKit
 
 final class ViewController: BaseBackgroundUIViewController {
-   
-    
-    
+
     private let exchangeRateView = ExchangeRateView()
     private let balanceView = MainPageBalanceView()
     private let manageBalanceView = MainPageManageBalanceButtonsView()
     private let transactionsHistoryView = TransactionsHistoryView()
-    
-    
+
     let viewModel: MainPageViewModel
     
     init(viewModel: MainPageViewModel) {
@@ -100,11 +97,7 @@ final class ViewController: BaseBackgroundUIViewController {
         }
         
         updateBalance()
-        
-        viewModel.userHasTransactions { hasTransactions in
-            transactionsHistoryView.noTransactionsLabel.isHidden = hasTransactions
-            transactionsHistoryView.tableView.isHidden = !hasTransactions
-        }
+        updateTransactions()
     }
     
     private func setupLayout() {
@@ -163,7 +156,11 @@ extension ViewController {
         let tableView = transactionsHistoryView.tableView
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 40
+        tableView.register(TransactionsHistoryTableViewCell.self, forCellReuseIdentifier: TransactionsHistoryTableViewCell.id)
+        tableView.rowHeight = 96
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        tableView.allowsSelection = false
         
     }
 }
@@ -178,8 +175,8 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = viewModel.transactions[indexPath.row].type ?? "unknown"
+        let cell = tableView.dequeueReusableCell(withIdentifier: TransactionsHistoryTableViewCell.id, for: indexPath) as! TransactionsHistoryTableViewCell
+        cell.config(from: viewModel.transactions[indexPath.row])
         return cell
     }
 }

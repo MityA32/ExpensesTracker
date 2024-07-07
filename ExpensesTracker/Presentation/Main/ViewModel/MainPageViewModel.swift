@@ -43,6 +43,7 @@ final class MainPageViewModel {
             bitcoinBalance = user.balance
             guard let transactions = user.transactions?.allObjects as? [Transaction] else { return }
             self.transactions.append(contentsOf: transactions)
+            self.transactions = self.transactions.sorted(by: { $0.timeCreated ?? Date() > $1.timeCreated ?? Date()})
             print(bitcoinBalance)
         }
     }
@@ -110,16 +111,20 @@ final class MainPageViewModel {
             exchangeRateModel.getBtcUsdRate { [weak self] in
                 switch $0 {
                 case .success(let rate):
+                    print("newly loading exchage rate")
                     self?.coredataService.performWrite { context in
                         user.bitcoinUsdExchangeRate = rate
                         user.exchangeRateLastTimeUpdated = Date()
                     }
                     completion(rate)
                 case .failure(_):
+                    print("failed loading exchage rate")
                     completion(user.bitcoinUsdExchangeRate ?? "--")
                 }
             }
         } else {
+            print("loaded from db \(user.bitcoinUsdExchangeRate)")
+            print("last time updated \(user.exchangeRateLastTimeUpdated)")
             completion(user.bitcoinUsdExchangeRate ?? "--")
         }
     }
