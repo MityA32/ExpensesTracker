@@ -30,7 +30,7 @@ final class AppCoordinator: Coordinator {
     private func showMain() {
 
         let mainPageViewModel = MainPageViewModel(exchangeRateModel: .init(), coredataService: CoreDataService.shared)
-        let mainViewController = ViewController(viewModel: mainPageViewModel)
+        let mainViewController = MainPageViewController(viewModel: mainPageViewModel)
         navigationController.viewControllers = [mainViewController]
     }
     

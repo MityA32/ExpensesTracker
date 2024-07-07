@@ -67,7 +67,7 @@ final class TransactionsHistoryTableViewCell: UITableViewCell {
             transactionValue.leadingAnchor.constraint(equalTo: customBackgroundView.leadingAnchor, constant: 16),
             
             transactionCategory.bottomAnchor.constraint(equalTo: customBackgroundView.bottomAnchor, constant: -8),
-            transactionCategory.centerXAnchor.constraint(equalTo: customBackgroundView.centerXAnchor),
+            transactionCategory.leadingAnchor.constraint(equalTo: customBackgroundView.leadingAnchor, constant: 16),
             
             transactionDate.topAnchor.constraint(equalTo: customBackgroundView.topAnchor, constant: 16),
             transactionDate.trailingAnchor.constraint(equalTo: customBackgroundView.trailingAnchor, constant: -16),

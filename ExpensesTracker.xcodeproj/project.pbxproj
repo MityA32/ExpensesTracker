@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		93C132C42C36EFA5004DFDFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C132C32C36EFA5004DFDFF /* AppDelegate.swift */; };
-		93C132C82C36EFA5004DFDFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C132C72C36EFA5004DFDFF /* ViewController.swift */; };
+		93C132C82C36EFA5004DFDFF /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C132C72C36EFA5004DFDFF /* MainPageViewController.swift */; };
 		93C132CE2C36EFA5004DFDFF /* ExpensesTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93C132CC2C36EFA5004DFDFF /* ExpensesTracker.xcdatamodeld */; };
 		93C132D02C36EFA8004DFDFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93C132CF2C36EFA8004DFDFF /* Assets.xcassets */; };
 		93C132D32C36EFA8004DFDFF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 93C132D22C36EFA8004DFDFF /* Base */; };
@@ -35,12 +35,13 @@
 		93C133182C3A8992004DFDFF /* AddTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133172C3A8992004DFDFF /* AddTransactionViewModel.swift */; };
 		93C1331B2C3B2B01004DFDFF /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331A2C3B2B01004DFDFF /* AddTransactionView.swift */; };
 		93C1331E2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */; };
+		93C133202C3B3EE6004DFDFF /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331F2C3B3EE6004DFDFF /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		93C132C02C36EFA5004DFDFF /* ExpensesTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C132C32C36EFA5004DFDFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		93C132C72C36EFA5004DFDFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		93C132C72C36EFA5004DFDFF /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		93C132CD2C36EFA5004DFDFF /* ExpensesTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpensesTracker.xcdatamodel; sourceTree = "<group>"; };
 		93C132CF2C36EFA8004DFDFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93C132D22C36EFA8004DFDFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		93C133172C3A8992004DFDFF /* AddTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewModel.swift; sourceTree = "<group>"; };
 		93C1331A2C3B2B01004DFDFF /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		93C1331F2C3B3EE6004DFDFF /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,7 +162,7 @@
 				93C133152C3A8930004DFDFF /* AddTransaction */,
 				93C133012C38A26D004DFDFF /* ViewModel */,
 				93C132F82C37018D004DFDFF /* Subviews */,
-				93C132C72C36EFA5004DFDFF /* ViewController.swift */,
+				93C132C72C36EFA5004DFDFF /* MainPageViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				93C132FA2C38145F004DFDFF /* NetworkingService.swift */,
+				93C1331F2C3B3EE6004DFDFF /* NetworkMonitor.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -381,7 +384,7 @@
 				93C133062C395183004DFDFF /* ExchangeRateView.swift in Sources */,
 				93C1330C2C395289004DFDFF /* MainPageBalanceView.swift in Sources */,
 				93C133082C395248004DFDFF /* TransactionsHistoryView.swift in Sources */,
-				93C132C82C36EFA5004DFDFF /* ViewController.swift in Sources */,
+				93C132C82C36EFA5004DFDFF /* MainPageViewController.swift in Sources */,
 				93C133042C394D91004DFDFF /* CoreDataHelpers.swift in Sources */,
 				93C132E72C36F319004DFDFF /* UIFont+Extension.swift in Sources */,
 				93C132C42C36EFA5004DFDFF /* AppDelegate.swift in Sources */,
@@ -389,6 +392,7 @@
 				93C133102C39609A004DFDFF /* AddTransactionViewController.swift in Sources */,
 				93C132CE2C36EFA5004DFDFF /* ExpensesTracker.xcdatamodeld in Sources */,
 				93C132F72C37001B004DFDFF /* EndpointsInstructions.swift in Sources */,
+				93C133202C3B3EE6004DFDFF /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

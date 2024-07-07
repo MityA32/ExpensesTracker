@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainPageViewController.swift
 //  ExpensesTracker
 //
 //  Created by Dmytro Hetman on 04.07.2024.
@@ -7,12 +7,13 @@
 
 import UIKit
 
-final class ViewController: BaseBackgroundUIViewController {
+final class MainPageViewController: BaseBackgroundUIViewController {
 
     private let exchangeRateView = ExchangeRateView()
     private let balanceView = MainPageBalanceView()
     private let manageBalanceView = MainPageManageBalanceButtonsView()
     private let transactionsHistoryView = TransactionsHistoryView()
+    
 
     let viewModel: MainPageViewModel
     
@@ -28,7 +29,39 @@ final class ViewController: BaseBackgroundUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupNetworkMonitor()
+    }
+    
+    private func setupNetworkMonitor() {
+        NotificationCenter.default.addObserver(self, selector: #selector(networkStatusChanged), name: .networkStatusChanged, object: nil)
+        
+        if NetworkMonitor.shared.isConnected {
+            networkDidBecomeAvailable()
+        } else {
+            networkDidBecomeUnavailable()
+        }
+    }
+    
+    @objc private func networkStatusChanged(notification: Notification) {
+        if NetworkMonitor.shared.isConnected {
+            networkDidBecomeAvailable()
+        } else {
+            networkDidBecomeUnavailable()
+        }
+    }
+    
+    private func networkDidBecomeAvailable() {
+        print("Network is available")
+        updateBitcoinUsdRate()
+    }
+    
+    private func networkDidBecomeUnavailable() {
+        
+        print("Network is unavailable")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .networkStatusChanged, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,12 +123,7 @@ final class ViewController: BaseBackgroundUIViewController {
     }
     
     private func setupValues() {
-        viewModel.getBtcUsdRate { [weak self] rate in
-            DispatchQueue.main.async {
-                self?.exchangeRateView.setExchangeRateValue(rate)
-            }
-        }
-        
+        updateBitcoinUsdRate()
         updateBalance()
         updateTransactions()
     }
@@ -135,6 +163,14 @@ final class ViewController: BaseBackgroundUIViewController {
         ])
     }
     
+    private func updateBitcoinUsdRate() {
+        viewModel.getBtcUsdRate { [weak self] rate in
+            DispatchQueue.main.async {
+                self?.exchangeRateView.setExchangeRateValue(rate)
+            }
+        }
+    }
+    
     private func updateBalance() {
         viewModel.configureBalance { balance in
             balanceView.accountBalanceLabel.text = balance
@@ -151,7 +187,7 @@ final class ViewController: BaseBackgroundUIViewController {
 
 }
 
-extension ViewController {
+extension MainPageViewController {
     private func setupTransactionsTable() {
         let tableView = transactionsHistoryView.tableView
         tableView.delegate = self
@@ -165,11 +201,7 @@ extension ViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate {
-
-}
-
-extension ViewController: UITableViewDataSource {
+extension MainPageViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.transactions.count
     }
@@ -181,7 +213,7 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-extension ViewController: AddTransactionDelegate {
+extension MainPageViewController: AddTransactionDelegate {
     func didAddTransaction(value: String, category: Category) {
         viewModel.addExpenseTransaction(transactionValue: value, for: category) { result in
             switch result {
@@ -191,15 +223,8 @@ extension ViewController: AddTransactionDelegate {
                 dismiss(animated: true)
             case .failure(let failure):
                 print(failure)
-//                showInsufficientFundsAlert()
             }
         }
-    }
-    
-    func didAddTransaction() {
-        print("-")
-        
-        
     }
     
     func dismiss() {

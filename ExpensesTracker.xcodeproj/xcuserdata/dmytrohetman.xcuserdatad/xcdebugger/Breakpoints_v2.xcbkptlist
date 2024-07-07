@@ -110,8 +110,8 @@
             filePath = "ExpensesTracker/Presentation/Main/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -130,6 +130,36 @@
             endingLineNumber = "111"
             landmarkName = "getBtcUsdRate(completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0CF95D87-90C3-497E-8D99-5C3F5EDB304A - e49e052f3364e293"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ExpensesTracker.MainPageViewModel.getBtcUsdRate(completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "ExpensesTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrohetman/projects/ExpensesTracker/ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111">
+               </Location>
+               <Location
+                  uuid = "0CF95D87-90C3-497E-8D99-5C3F5EDB304A - 910abee385560d55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in ExpensesTracker.MainPageViewModel.getBtcUsdRate(completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "ExpensesTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrohetman/projects/ExpensesTracker/ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,6 +175,22 @@
             startingLineNumber = "48"
             endingLineNumber = "48"
             landmarkName = "configureUserInfo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EB4520B-9734-48C1-8F94-F310159BEF95"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ExpensesTracker/Presentation/Main/MainPageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "networkDidBecomeAvailable()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
