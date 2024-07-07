@@ -8,8 +8,7 @@
 import Foundation
 
 final class AddTransactionViewModel {
-    
-    
+
     let categories: [Category] = [.groceries, .taxi, .electronics, .restaurant, .other]
     @Fetch var users: [User]
     
@@ -20,8 +19,6 @@ final class AddTransactionViewModel {
         } else {
             completion(false)
         }
-        
     }
-    
     
 }

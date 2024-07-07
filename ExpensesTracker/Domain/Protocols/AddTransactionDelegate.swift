@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol AddTransactionDelegate: AnyObject {
+    func didAddTransaction(value: String, category: Category)
+    func dismiss()
+}

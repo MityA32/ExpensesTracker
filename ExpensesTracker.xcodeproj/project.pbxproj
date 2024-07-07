@@ -24,7 +24,7 @@
 		93C132FB2C38145F004DFDFF /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C132FA2C38145F004DFDFF /* NetworkingService.swift */; };
 		93C132FD2C3885F8004DFDFF /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C132FC2C3885F8004DFDFF /* MainPageViewModel.swift */; };
 		93C133002C388E7A004DFDFF /* CurrentBitcoinPriceResponse+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C132FF2C388E7A004DFDFF /* CurrentBitcoinPriceResponse+Mapping.swift */; };
-		93C133042C394D91004DFDFF /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133032C394D91004DFDFF /* CoreDataHelpers.swift */; };
+		93C133042C394D91004DFDFF /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133032C394D91004DFDFF /* CoreDataService.swift */; };
 		93C133062C395183004DFDFF /* ExchangeRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133052C395183004DFDFF /* ExchangeRateView.swift */; };
 		93C133082C395248004DFDFF /* TransactionsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133072C395248004DFDFF /* TransactionsHistoryView.swift */; };
 		93C1330A2C395263004DFDFF /* MainPageManageBalanceButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133092C395263004DFDFF /* MainPageManageBalanceButtonsView.swift */; };
@@ -36,6 +36,10 @@
 		93C1331B2C3B2B01004DFDFF /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331A2C3B2B01004DFDFF /* AddTransactionView.swift */; };
 		93C1331E2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */; };
 		93C133202C3B3EE6004DFDFF /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1331F2C3B3EE6004DFDFF /* NetworkMonitor.swift */; };
+		93C133232C3B4102004DFDFF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133222C3B4102004DFDFF /* NetworkError.swift */; };
+		93C133252C3B4119004DFDFF /* TransactionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133242C3B4119004DFDFF /* TransactionError.swift */; };
+		93C133292C3B4405004DFDFF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C133282C3B4405004DFDFF /* Coordinator.swift */; };
+		93C1332B2C3B445E004DFDFF /* AddTransactionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C1332A2C3B445E004DFDFF /* AddTransactionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +62,7 @@
 		93C132FA2C38145F004DFDFF /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		93C132FC2C3885F8004DFDFF /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		93C132FF2C388E7A004DFDFF /* CurrentBitcoinPriceResponse+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentBitcoinPriceResponse+Mapping.swift"; sourceTree = "<group>"; };
-		93C133032C394D91004DFDFF /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
+		93C133032C394D91004DFDFF /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		93C133052C395183004DFDFF /* ExchangeRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateView.swift; sourceTree = "<group>"; };
 		93C133072C395248004DFDFF /* TransactionsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryView.swift; sourceTree = "<group>"; };
 		93C133092C395263004DFDFF /* MainPageManageBalanceButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageManageBalanceButtonsView.swift; sourceTree = "<group>"; };
@@ -70,6 +74,10 @@
 		93C1331A2C3B2B01004DFDFF /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		93C1331F2C3B3EE6004DFDFF /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		93C133222C3B4102004DFDFF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		93C133242C3B4119004DFDFF /* TransactionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionError.swift; sourceTree = "<group>"; };
+		93C133282C3B4405004DFDFF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		93C1332A2C3B445E004DFDFF /* AddTransactionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +110,7 @@
 		93C132C22C36EFA5004DFDFF /* ExpensesTracker */ = {
 			isa = PBXGroup;
 			children = (
+				93C133262C3B43F1004DFDFF /* Domain */,
 				93C132DA2C36F09B004DFDFF /* Application */,
 				93C132DB2C36F0A8004DFDFF /* Resources */,
 				93C132F22C36F724004DFDFF /* Data */,
@@ -181,6 +190,7 @@
 		93C132E52C36F307004DFDFF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				93C133212C3B40F1004DFDFF /* Errors */,
 				93C133022C394D73004DFDFF /* CoreDataService */,
 				93C132F92C381442004DFDFF /* Networking */,
 				93C132F02C36F6D6004DFDFF /* Extensions */,
@@ -257,7 +267,7 @@
 		93C133022C394D73004DFDFF /* CoreDataService */ = {
 			isa = PBXGroup;
 			children = (
-				93C133032C394D91004DFDFF /* CoreDataHelpers.swift */,
+				93C133032C394D91004DFDFF /* CoreDataService.swift */,
 			);
 			path = CoreDataService;
 			sourceTree = "<group>";
@@ -294,6 +304,32 @@
 				93C1331D2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		93C133212C3B40F1004DFDFF /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				93C133222C3B4102004DFDFF /* NetworkError.swift */,
+				93C133242C3B4119004DFDFF /* TransactionError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		93C133262C3B43F1004DFDFF /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				93C133272C3B43F7004DFDFF /* Protocols */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		93C133272C3B43F7004DFDFF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				93C133282C3B4405004DFDFF /* Coordinator.swift */,
+				93C1332A2C3B445E004DFDFF /* AddTransactionDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +408,7 @@
 			files = (
 				93C1331B2C3B2B01004DFDFF /* AddTransactionView.swift in Sources */,
 				93C132E32C36F1C3004DFDFF /* BaseBackgroundUIViewController.swift in Sources */,
+				93C133292C3B4405004DFDFF /* Coordinator.swift in Sources */,
 				93C132F52C36FCA2004DFDFF /* APIEndpoints.swift in Sources */,
 				93C1331E2C3B2CBC004DFDFF /* TransactionsHistoryTableViewCell.swift in Sources */,
 				93C133122C397859004DFDFF /* ExchangeRateModel.swift in Sources */,
@@ -379,18 +416,21 @@
 				93C1330A2C395263004DFDFF /* MainPageManageBalanceButtonsView.swift in Sources */,
 				93C132FD2C3885F8004DFDFF /* MainPageViewModel.swift in Sources */,
 				93C133142C397916004DFDFF /* Date+Extension.swift in Sources */,
+				93C133232C3B4102004DFDFF /* NetworkError.swift in Sources */,
 				93C132DF2C36F10A004DFDFF /* AppCoordinator.swift in Sources */,
 				93C132FB2C38145F004DFDFF /* NetworkingService.swift in Sources */,
+				93C1332B2C3B445E004DFDFF /* AddTransactionDelegate.swift in Sources */,
 				93C133062C395183004DFDFF /* ExchangeRateView.swift in Sources */,
 				93C1330C2C395289004DFDFF /* MainPageBalanceView.swift in Sources */,
 				93C133082C395248004DFDFF /* TransactionsHistoryView.swift in Sources */,
 				93C132C82C36EFA5004DFDFF /* MainPageViewController.swift in Sources */,
-				93C133042C394D91004DFDFF /* CoreDataHelpers.swift in Sources */,
+				93C133042C394D91004DFDFF /* CoreDataService.swift in Sources */,
 				93C132E72C36F319004DFDFF /* UIFont+Extension.swift in Sources */,
 				93C132C42C36EFA5004DFDFF /* AppDelegate.swift in Sources */,
 				93C133002C388E7A004DFDFF /* CurrentBitcoinPriceResponse+Mapping.swift in Sources */,
 				93C133102C39609A004DFDFF /* AddTransactionViewController.swift in Sources */,
 				93C132CE2C36EFA5004DFDFF /* ExpensesTracker.xcdatamodeld in Sources */,
+				93C133252C3B4119004DFDFF /* TransactionError.swift in Sources */,
 				93C132F72C37001B004DFDFF /* EndpointsInstructions.swift in Sources */,
 				93C133202C3B3EE6004DFDFF /* NetworkMonitor.swift in Sources */,
 			);

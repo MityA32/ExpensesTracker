@@ -50,7 +50,6 @@ final class TransactionsHistoryView: UIView {
         addSubview(tableView)
         
         NSLayoutConstraint.activate([
-
             mainLabel.topAnchor.constraint(equalTo: topAnchor),
             mainLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             mainLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -64,7 +63,6 @@ final class TransactionsHistoryView: UIView {
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
         ])
     }
 }

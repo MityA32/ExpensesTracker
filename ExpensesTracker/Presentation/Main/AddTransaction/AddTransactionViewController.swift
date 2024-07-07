@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol AddTransactionDelegate: AnyObject {
-    func didAddTransaction(value: String, category: Category)
-    func dismiss()
-}
-
 final class AddTransactionViewController: UIViewController {
     
     let addTransactionView = AddTransactionView()

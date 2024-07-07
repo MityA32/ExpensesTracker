@@ -60,7 +60,6 @@ final class MainPageManageBalanceButtonsView: UIView {
         
         buttonsStackView.addArrangedSubview(topUpBalanceButton)
         buttonsStackView.addArrangedSubview(addTransactionButton)
-        
     }
     
 }

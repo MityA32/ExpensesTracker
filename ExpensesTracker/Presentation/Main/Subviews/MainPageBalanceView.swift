@@ -51,9 +51,7 @@ final class MainPageBalanceView: UIView {
         addSubview(accountBalanceLabel)
         addSubview(balanceCurrencyLabel)
         
-        
         NSLayoutConstraint.activate([
-
             yourBalanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             yourBalanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             yourBalanceLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -66,9 +64,8 @@ final class MainPageBalanceView: UIView {
             
             balanceCurrencyLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             balanceCurrencyLabel.leadingAnchor.constraint(equalTo: accountBalanceLabel.trailingAnchor, constant: 4),
-            balanceCurrencyLabel.heightAnchor.constraint(equalToConstant: 16),
-            
+            balanceCurrencyLabel.heightAnchor.constraint(equalToConstant: 16)
         ])
-        
     }
+
 }

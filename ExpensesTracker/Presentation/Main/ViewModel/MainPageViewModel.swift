@@ -7,16 +7,6 @@
 
 import Foundation
 
-
-enum NetworkError: Error {
-    case decodingFailed
-}
-
-enum TransactionError: Error {
-    case insufficientFunds
-
-}
-
 final class MainPageViewModel {
     
     private let exchangeRateModel: ExchangeRateModel
@@ -25,8 +15,6 @@ final class MainPageViewModel {
     @Fetch var users: [User]
     var bitcoinBalance: Double = 0
     var transactions: [Transaction] = []
-    
-    
     
     init(exchangeRateModel: ExchangeRateModel, coredataService: CoreDataService) {
         self.exchangeRateModel = exchangeRateModel
@@ -41,9 +29,11 @@ final class MainPageViewModel {
             guard let user = users.first else { return }
             
             bitcoinBalance = user.balance
+            
             guard let transactions = user.transactions?.allObjects as? [Transaction] else { return }
             self.transactions.append(contentsOf: transactions)
             self.transactions = self.transactions.sorted(by: { $0.timeCreated ?? Date() > $1.timeCreated ?? Date()})
+            
             print(bitcoinBalance)
         }
     }
@@ -61,46 +51,48 @@ final class MainPageViewModel {
     }
     
     func topUpBalance(on amount: String, completion: (String) -> Void) {
-        if let topUpValue = Double(amount.replacingOccurrences(of: ",", with: ".")) {
+        guard let topUpValue = Double(amount.replacingOccurrences(of: ",", with: "."))
+        else { return }
+        coredataService.performWrite { [weak self] context in
+            guard let user = self?.users.first else { return }
+            user.balance += topUpValue
+
+            self?.coredataService.create(Transaction.self) { transaction in
+                transaction.id = UUID()
+                transaction.amount = topUpValue
+                transaction.timeCreated = Date()
+                transaction.type = TransactionType.incoming.rawValue
+                transaction.user = user
+
+                self?.transactions.insert(transaction, at: 0)
+            }
+        }
+        
+        bitcoinBalance += topUpValue
+        completion(String(format: "%g", bitcoinBalance))
+    }
+    
+    func addExpenseTransaction(transactionValue: String, for category: Category, completion: (Result<String, TransactionError>) -> Void) {
+        guard let transactionValue = Double(transactionValue.replacingOccurrences(of: ",", with: ".")) else { return }
+        
+        if bitcoinBalance < transactionValue {
+            completion(.failure(TransactionError.insufficientFunds))
+        } else {
             coredataService.performWrite { [weak self] context in
                 guard let user = self?.users.first else { return }
-                user.balance += topUpValue
+                user.balance -= transactionValue
                 self?.coredataService.create(Transaction.self) { transaction in
                     transaction.id = UUID()
-                    transaction.amount = topUpValue
+                    transaction.amount = transactionValue
                     transaction.timeCreated = Date()
-                    transaction.type = TransactionType.incoming.rawValue
+                    transaction.category = category.rawValue
+                    transaction.type = TransactionType.outgoing.rawValue
                     transaction.user = user
                     self?.transactions.insert(transaction, at: 0)
                 }
             }
-            bitcoinBalance += topUpValue
-            completion(String(format: "%g", bitcoinBalance))
-
-        }
-    }
-    
-    func addExpenseTransaction(transactionValue: String, for category: Category, completion: (Result<String, TransactionError>) -> Void) {
-        if let transactionValue = Double(transactionValue.replacingOccurrences(of: ",", with: ".")) {
-            if bitcoinBalance < transactionValue {
-                completion(.failure(TransactionError.insufficientFunds))
-            } else {
-                coredataService.performWrite { [weak self] context in
-                    guard let user = self?.users.first else { return }
-                    user.balance -= transactionValue
-                    self?.coredataService.create(Transaction.self) { transaction in
-                        transaction.id = UUID()
-                        transaction.amount = transactionValue
-                        transaction.timeCreated = Date()
-                        transaction.category = category.rawValue
-                        transaction.type = TransactionType.outgoing.rawValue
-                        transaction.user = user
-                        self?.transactions.insert(transaction, at: 0)
-                    }
-                }
-                bitcoinBalance -= transactionValue
-                completion(.success(String(format: "%g", bitcoinBalance)))
-            }
+            bitcoinBalance -= transactionValue
+            completion(.success(String(format: "%g", bitcoinBalance)))
         }
     }
     

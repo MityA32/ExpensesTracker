@@ -5,4 +5,9 @@
 //  Created by Dmytro Hetman on 08.07.2024.
 //
 
-import Foundation
+import UIKit
+
+protocol Coordinator {
+    var navigationController: UINavigationController { get }
+    func start()
+}

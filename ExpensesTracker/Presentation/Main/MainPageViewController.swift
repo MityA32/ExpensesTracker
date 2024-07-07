@@ -13,6 +13,7 @@ final class MainPageViewController: BaseBackgroundUIViewController {
     private let balanceView = MainPageBalanceView()
     private let manageBalanceView = MainPageManageBalanceButtonsView()
     private let transactionsHistoryView = TransactionsHistoryView()
+    private let networkConnectionStatusLabel = UILabel()
     
 
     let viewModel: MainPageViewModel
@@ -29,35 +30,7 @@ final class MainPageViewController: BaseBackgroundUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNetworkMonitor()
-    }
-    
-    private func setupNetworkMonitor() {
-        NotificationCenter.default.addObserver(self, selector: #selector(networkStatusChanged), name: .networkStatusChanged, object: nil)
         
-        if NetworkMonitor.shared.isConnected {
-            networkDidBecomeAvailable()
-        } else {
-            networkDidBecomeUnavailable()
-        }
-    }
-    
-    @objc private func networkStatusChanged(notification: Notification) {
-        if NetworkMonitor.shared.isConnected {
-            networkDidBecomeAvailable()
-        } else {
-            networkDidBecomeUnavailable()
-        }
-    }
-    
-    private func networkDidBecomeAvailable() {
-        print("Network is available")
-        updateBitcoinUsdRate()
-    }
-    
-    private func networkDidBecomeUnavailable() {
-        
-        print("Network is unavailable")
     }
     
     deinit {
@@ -73,6 +46,7 @@ final class MainPageViewController: BaseBackgroundUIViewController {
         setupButtons()
         setupLayout()
         setupTransactionsTable()
+        setupNetworkMonitor()
     }
     
     private func setupButtons() {
@@ -188,6 +162,64 @@ final class MainPageViewController: BaseBackgroundUIViewController {
 }
 
 extension MainPageViewController {
+    
+    private func setupNetworkMonitor() {
+        setupNetworkStatusLabel()
+        NotificationCenter.default.addObserver(self, selector: #selector(networkStatusChanged), name: .networkStatusChanged, object: nil)
+        
+        if NetworkMonitor.checkInternetConnectivity() {
+            networkDidBecomeAvailable()
+        } else {
+            networkDidBecomeUnavailable()
+        }
+    }
+    
+    @objc private func networkStatusChanged(notification: Notification) {
+        if NetworkMonitor.checkInternetConnectivity() {
+            networkDidBecomeAvailable()
+        } else {
+            networkDidBecomeUnavailable()
+        }
+    }
+    
+    private func networkDidBecomeAvailable() {
+        DispatchQueue.main.async { [weak self] in
+            self?.networkConnectionStatusLabel.isHidden = false
+            self?.networkConnectionStatusLabel.text = "Connection is here!"
+            
+        }
+        print("Network is available")
+        updateBitcoinUsdRate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.networkConnectionStatusLabel.isHidden = true
+        }
+    }
+    
+    private func networkDidBecomeUnavailable() {
+        DispatchQueue.main.async { [weak self] in
+            self?.networkConnectionStatusLabel.text = "No internet connection..."
+            self?.networkConnectionStatusLabel.isHidden = false
+        }
+        print("Network is unavailable")
+    }
+    
+    private func setupNetworkStatusLabel() {
+        networkConnectionStatusLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(networkConnectionStatusLabel)
+        
+        NSLayoutConstraint.activate([
+            networkConnectionStatusLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            networkConnectionStatusLabel.centerYAnchor.constraint(equalTo: exchangeRateView.centerYAnchor)
+        ])
+        
+        networkConnectionStatusLabel.font = .sfProDisplay(ofSize: 14, weight: .regular)
+        networkConnectionStatusLabel.textColor = .white
+        networkConnectionStatusLabel.isHidden = true
+    }
+}
+
+extension MainPageViewController {
     private func setupTransactionsTable() {
         let tableView = transactionsHistoryView.tableView
         tableView.delegate = self
@@ -207,7 +239,11 @@ extension MainPageViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TransactionsHistoryTableViewCell.id, for: indexPath) as! TransactionsHistoryTableViewCell
+        let cell = tableView
+            .dequeueReusableCell(
+                withIdentifier: TransactionsHistoryTableViewCell.id,
+                for: indexPath
+            ) as! TransactionsHistoryTableViewCell
         cell.config(from: viewModel.transactions[indexPath.row])
         return cell
     }

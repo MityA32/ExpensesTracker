@@ -7,20 +7,14 @@
 
 import UIKit
 
-protocol Coordinator {
-    var navigationController: UINavigationController { get }
-    func start()
-}
-
 final class AppCoordinator: Coordinator {
-    private var window: UIWindow
+    private let window = UIWindow(frame: UIScreen.main.bounds)
     let navigationController = UINavigationController()
     
-    init(window: UIWindow) {
-        self.window = window
+    init() {
         navigationController.navigationBar.isHidden = true
-        self.window.rootViewController = navigationController
-        self.window.makeKeyAndVisible()
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
     
     func start() {
@@ -28,16 +22,10 @@ final class AppCoordinator: Coordinator {
     }
     
     private func showMain() {
-
         let mainPageViewModel = MainPageViewModel(exchangeRateModel: .init(), coredataService: CoreDataService.shared)
         let mainViewController = MainPageViewController(viewModel: mainPageViewModel)
         navigationController.viewControllers = [mainViewController]
     }
-    
-    private func showAddTransaction() {
-        
-        
-        
-    }
+
 }
 

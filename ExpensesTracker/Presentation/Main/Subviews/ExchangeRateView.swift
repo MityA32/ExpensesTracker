@@ -54,13 +54,10 @@ final class ExchangeRateView: UIView {
             exchangeRateValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             exchangeRateValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             
-            
-            
             currencyRatioLabel.trailingAnchor.constraint(equalTo: exchangeRateValueLabel.leadingAnchor, constant: -8),
             currencyRatioLabel.heightAnchor.constraint(equalToConstant: 28),
             currencyRatioLabel.widthAnchor.constraint(equalToConstant: 72),
             currencyRatioLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-            
         ])
     }
     
