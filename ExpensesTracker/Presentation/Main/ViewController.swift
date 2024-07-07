@@ -8,6 +8,8 @@
 import UIKit
 
 final class ViewController: BaseBackgroundUIViewController {
+   
+    
     
     private let exchangeRateView = ExchangeRateView()
     private let balanceView = MainPageBalanceView()
@@ -40,11 +42,16 @@ final class ViewController: BaseBackgroundUIViewController {
     
     private func setupButtons() {
         manageBalanceView.topUpBalanceButton.addTarget(self, action: #selector(showAddBitcoinPopUp), for: .touchUpInside)
+        manageBalanceView.addTransactionButton.addTarget(self, action: #selector(showAddTransactionScreen), for: .touchUpInside)
     }
     
     @objc func showAddTransactionScreen() {
-        
+        let addTransactionVC = AddTransactionViewController(viewModel: AddTransactionViewModel())
+        addTransactionVC.delegate = self
+        addTransactionVC.modalPresentationStyle = .overFullScreen
+        navigationController?.present(addTransactionVC, animated: true)
     }
+    
     
     @objc func showAddBitcoinPopUp() {
         let alertController = UIAlertController(title: "Add Bitcoins", message: "Enter the amount of bitcoins", preferredStyle: .alert)
@@ -121,4 +128,15 @@ final class ViewController: BaseBackgroundUIViewController {
         ])
     }
 
+}
+
+extension ViewController: AddTransactionDelegate {
+    func didAddTransaction() {
+        print("-")
+        dismiss(animated: true)
+    }
+    
+    func dismiss() {
+        dismiss(animated: true)
+    }
 }
