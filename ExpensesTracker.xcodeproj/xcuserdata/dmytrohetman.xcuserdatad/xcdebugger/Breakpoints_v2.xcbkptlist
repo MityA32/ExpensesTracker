@@ -14,8 +14,8 @@
             filePath = "ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "topUpBalance(on:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "getBtcUsdRate(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -71,31 +71,137 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DE79C213-B53C-4FDB-9901-37D3A77D1424"
+            uuid = "E46CAF3D-4920-498C-B303-8D4ED57FB243"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "configureUserInfo()"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "topUpBalance(on:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8A9930DC-0039-4200-AC3E-F08C7A4CD7DC"
+            uuid = "6832FB62-E250-4CAD-A273-5398B8537A42"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "topUpBalance(on:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C45AFA9-6BBC-4A56-A0A9-3B23FD55D7F7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ExpensesTracker/Presentation/Main/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0CF95D87-90C3-497E-8D99-5C3F5EDB304A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "getBtcUsdRate(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0CF95D87-90C3-497E-8D99-5C3F5EDB304A - 910abee385560d55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in ExpensesTracker.MainPageViewModel.getBtcUsdRate(completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "ExpensesTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrohetman/projects/ExpensesTracker/ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111">
+               </Location>
+               <Location
+                  uuid = "0CF95D87-90C3-497E-8D99-5C3F5EDB304A - 910abee385560d55"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in ExpensesTracker.MainPageViewModel.getBtcUsdRate(completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "ExpensesTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrohetman/projects/ExpensesTracker/ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111">
+               </Location>
+               <Location
+                  uuid = "0CF95D87-90C3-497E-8D99-5C3F5EDB304A - e49e052f3364e2b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ExpensesTracker.MainPageViewModel.getBtcUsdRate(completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "ExpensesTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrohetman/projects/ExpensesTracker/ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110">
+               </Location>
+               <Location
+                  uuid = "0CF95D87-90C3-497E-8D99-5C3F5EDB304A - 910abee385560d72"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.String, Swift.Error&gt;) -&gt; () in ExpensesTracker.MainPageViewModel.getBtcUsdRate(completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "ExpensesTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrohetman/projects/ExpensesTracker/ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FAA9A896-F7FA-4973-BF8D-F6A824A35583"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ExpensesTracker/Presentation/Main/ViewModel/MainPageViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "configureUserInfo()"
             landmarkType = "7">
          </BreakpointContent>

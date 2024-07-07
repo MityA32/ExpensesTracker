@@ -33,11 +33,16 @@ final class ViewController: BaseBackgroundUIViewController {
         super.viewDidLoad()
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupValues()
+    }
 
     private func setup() {
         setupButtons()
-        setupValues()
         setupLayout()
+        setupTransactionsTable()
     }
     
     private func setupButtons() {
@@ -46,6 +51,7 @@ final class ViewController: BaseBackgroundUIViewController {
     }
     
     @objc func showAddTransactionScreen() {
+        guard let user = viewModel.users.first else { return }
         let addTransactionVC = AddTransactionViewController(viewModel: AddTransactionViewModel())
         addTransactionVC.delegate = self
         addTransactionVC.modalPresentationStyle = .overFullScreen
@@ -83,6 +89,7 @@ final class ViewController: BaseBackgroundUIViewController {
             balanceView.accountBalanceLabel.text = $0
         }
         
+        updateTransactions()
     }
     
     private func setupValues() {
@@ -90,6 +97,13 @@ final class ViewController: BaseBackgroundUIViewController {
             DispatchQueue.main.async {
                 self?.exchangeRateView.setExchangeRateValue(rate)
             }
+        }
+        
+        updateBalance()
+        
+        viewModel.userHasTransactions { hasTransactions in
+            transactionsHistoryView.noTransactionsLabel.isHidden = hasTransactions
+            transactionsHistoryView.tableView.isHidden = !hasTransactions
         }
     }
     
@@ -127,16 +141,73 @@ final class ViewController: BaseBackgroundUIViewController {
 
         ])
     }
+    
+    private func updateBalance() {
+        viewModel.configureBalance { balance in
+            balanceView.accountBalanceLabel.text = balance
+        }
+    }
+    
+    private func updateTransactions() {
+        viewModel.userHasTransactions { hasTransactions in
+            transactionsHistoryView.noTransactionsLabel.isHidden = hasTransactions
+            transactionsHistoryView.tableView.isHidden = !hasTransactions
+            transactionsHistoryView.tableView.reloadData()
+        }
+    }
 
 }
 
+extension ViewController {
+    private func setupTransactionsTable() {
+        let tableView = transactionsHistoryView.tableView
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 40
+        
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+
+}
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.transactions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = viewModel.transactions[indexPath.row].type ?? "unknown"
+        return cell
+    }
+}
+
 extension ViewController: AddTransactionDelegate {
+    func didAddTransaction(value: String, category: Category) {
+        viewModel.addExpenseTransaction(transactionValue: value, for: category) { result in
+            switch result {
+            case .success(let success):
+                updateBalance()
+                updateTransactions()
+                dismiss(animated: true)
+            case .failure(let failure):
+                print(failure)
+//                showInsufficientFundsAlert()
+            }
+        }
+    }
+    
     func didAddTransaction() {
         print("-")
-        dismiss(animated: true)
+        
+        
     }
     
     func dismiss() {
         dismiss(animated: true)
     }
+    
+   
 }

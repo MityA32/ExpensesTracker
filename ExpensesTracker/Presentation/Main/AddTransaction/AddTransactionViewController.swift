@@ -106,7 +106,7 @@ final class AddTransactionView: UIView {
 }
 
 protocol AddTransactionDelegate: AnyObject {
-    func didAddTransaction()
+    func didAddTransaction(value: String, category: Category)
     func dismiss()
 }
 
@@ -188,15 +188,32 @@ final class AddTransactionViewController: UIViewController {
     }
     
     @objc func addTransaction() {
-        guard let amountText = addTransactionView.amountTextField.text,
-              let amount = Double(amountText) else { return }
+        guard let amountText = addTransactionView.amountTextField.text else { return }
         
         let selectedCategory = viewModel.categories[addTransactionView.categoryPicker.selectedRow(inComponent: 0)]
         
         
+        viewModel
+            .checkTransactionPossibility(transactionValue: amountText) { canMakeTransaction in
+            if canMakeTransaction {
+                delegate?.didAddTransaction(value: amountText, category: selectedCategory)
+            } else {
+                showInsufficientFundsAlert()
+            }
+        }
         
-        delegate?.didAddTransaction()
         
+    }
+    
+    private func showInsufficientFundsAlert() {
+//        TransactionError.insufficientFunds
+        let alertController = UIAlertController(title: "Error", message: "Insufficient Funds", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc func dismissScreen() {

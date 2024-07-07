@@ -43,9 +43,11 @@ final class TransactionsHistoryView: UIView {
     private func setupLayout() {
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         noTransactionsLabel.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(mainLabel)
         addSubview(noTransactionsLabel)
+        addSubview(tableView)
         
         NSLayoutConstraint.activate([
 
@@ -57,6 +59,11 @@ final class TransactionsHistoryView: UIView {
             noTransactionsLabel.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 100),
             noTransactionsLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             noTransactionsLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 32),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
         ])
     }

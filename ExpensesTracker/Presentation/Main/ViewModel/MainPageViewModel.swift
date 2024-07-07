@@ -12,7 +12,10 @@ enum NetworkError: Error {
     case decodingFailed
 }
 
+enum TransactionError: Error {
+    case insufficientFunds
 
+}
 
 final class MainPageViewModel {
     
@@ -35,12 +38,12 @@ final class MainPageViewModel {
         if users.isEmpty {
             createUser()
         } else {
-            guard let user = user() else { return }
+            guard let user = users.first else { return }
             
             bitcoinBalance = user.balance
             guard let transactions = user.transactions?.allObjects as? [Transaction] else { return }
             self.transactions.append(contentsOf: transactions)
-            
+            print(bitcoinBalance)
         }
     }
     
@@ -58,25 +61,62 @@ final class MainPageViewModel {
     
     func topUpBalance(on amount: String, completion: (String) -> Void) {
         if let topUpValue = Double(amount.replacingOccurrences(of: ",", with: ".")) {
+            coredataService.performWrite { [weak self] context in
+                guard let user = self?.users.first else { return }
+                user.balance += topUpValue
+                self?.coredataService.create(Transaction.self) { transaction in
+                    transaction.id = UUID()
+                    transaction.amount = topUpValue
+                    transaction.timeCreated = Date()
+                    transaction.type = TransactionType.incoming.rawValue
+                    transaction.user = user
+                    self?.transactions.insert(transaction, at: 0)
+                }
+            }
             bitcoinBalance += topUpValue
-            completion("\(bitcoinBalance)")
+            completion(String(format: "%g", bitcoinBalance))
+
+        }
+    }
+    
+    func addExpenseTransaction(transactionValue: String, for category: Category, completion: (Result<String, TransactionError>) -> Void) {
+        if let transactionValue = Double(transactionValue.replacingOccurrences(of: ",", with: ".")) {
+            if bitcoinBalance < transactionValue {
+                completion(.failure(TransactionError.insufficientFunds))
+            } else {
+                coredataService.performWrite { [weak self] context in
+                    guard let user = self?.users.first else { return }
+                    user.balance -= transactionValue
+                    self?.coredataService.create(Transaction.self) { transaction in
+                        transaction.id = UUID()
+                        transaction.amount = transactionValue
+                        transaction.timeCreated = Date()
+                        transaction.category = category.rawValue
+                        transaction.type = TransactionType.outgoing.rawValue
+                        transaction.user = user
+                        self?.transactions.insert(transaction, at: 0)
+                    }
+                }
+                bitcoinBalance -= transactionValue
+                completion(.success(String(format: "%g", bitcoinBalance)))
+            }
         }
     }
     
     func getBtcUsdRate(completion: @escaping (String) -> Void) {
-        guard let user = user() else { return }
-        if user.exchangeRateLastTimeUpdated?.hasOneHourPassed() == true || user.exchangeRateLastTimeUpdated == nil  {
+        guard let user = users.first else { return }
+        if user.exchangeRateLastTimeUpdated?.hasOneHourPassed() == true || user.bitcoinUsdExchangeRate == nil  {
+            print(user.exchangeRateLastTimeUpdated?.formatted())
             exchangeRateModel.getBtcUsdRate { [weak self] in
                 switch $0 {
                 case .success(let rate):
                     self?.coredataService.performWrite { context in
-                        guard let user = self?.user() else { return }
                         user.bitcoinUsdExchangeRate = rate
                         user.exchangeRateLastTimeUpdated = Date()
                     }
                     completion(rate)
                 case .failure(_):
-                    completion("--")
+                    completion(user.bitcoinUsdExchangeRate ?? "--")
                 }
             }
         } else {
@@ -84,12 +124,12 @@ final class MainPageViewModel {
         }
     }
     
-    private func user() -> User? {
-        guard users.count == 1,
-            let user = users.first
-        else { return nil }
-        return user
+    func configureBalance(completion: (String) -> Void) {
+        completion(String(format: "%g", bitcoinBalance))
     }
     
+    func userHasTransactions(completion: (Bool) -> Void) {
+        completion(!transactions.isEmpty)
+    }
     
 }
