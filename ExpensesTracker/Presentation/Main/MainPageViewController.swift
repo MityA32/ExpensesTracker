@@ -280,6 +280,7 @@ extension MainPageViewController: UITableViewDataSource, UITableViewDelegate {
            guard let self else { return }
            if !newTransactions.isEmpty {
                let tableView = transactionsHistoryView.tableView
+               // for view like something loading
                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                    tableView.reloadData()
                }
