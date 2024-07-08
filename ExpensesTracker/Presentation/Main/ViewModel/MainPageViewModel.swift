@@ -15,6 +15,19 @@ final class MainPageViewModel {
     @Fetch var users: [User]
     var bitcoinBalance: Double = 0
     var transactions: [Transaction] = []
+    var currentPage = 0
+    let pageSize = 20
+    
+    var groupedTransactions: [(date: Date, transactions: [Transaction])] {
+        let calendar = Calendar.current
+        let grouped = Dictionary(grouping: transactions) { (transaction) -> Date in
+            return calendar.startOfDay(for: transaction.timeCreated ?? Date())
+        }
+        
+        return grouped.keys.sorted(by: >).map { (date) -> (date: Date, transactions: [Transaction]) in
+            return (date: date, transactions: grouped[date]!)
+        }
+    }
     
     init(exchangeRateModel: ExchangeRateModel, coredataService: CoreDataService) {
         self.exchangeRateModel = exchangeRateModel
@@ -67,9 +80,11 @@ final class MainPageViewModel {
                 self?.transactions.insert(transaction, at: 0)
             }
         }
-        
-        bitcoinBalance += topUpValue
-        completion(String(format: "%g", bitcoinBalance))
+        let decimalBitcoinBalance = Decimal(bitcoinBalance)
+        let decimalTransactionValue = Decimal(topUpValue)
+
+        bitcoinBalance = NSDecimalNumber(decimal: decimalBitcoinBalance + decimalTransactionValue).doubleValue
+        completion(NSDecimalNumber(decimal: Decimal(bitcoinBalance)).stringValue)
     }
     
     func addExpenseTransaction(transactionValue: String, for category: Category, completion: (Result<String, TransactionError>) -> Void) {
@@ -91,8 +106,11 @@ final class MainPageViewModel {
                     self?.transactions.insert(transaction, at: 0)
                 }
             }
-            bitcoinBalance -= transactionValue
-            completion(.success(String(format: "%g", bitcoinBalance)))
+            let decimalBitcoinBalance = Decimal(bitcoinBalance)
+            let decimalTransactionValue = Decimal(transactionValue)
+
+            bitcoinBalance = NSDecimalNumber(decimal: decimalBitcoinBalance - decimalTransactionValue).doubleValue
+            completion(.success(NSDecimalNumber(decimal: Decimal(bitcoinBalance)).stringValue))
         }
     }
     
@@ -122,11 +140,28 @@ final class MainPageViewModel {
     }
     
     func configureBalance(completion: (String) -> Void) {
-        completion(String(format: "%g", bitcoinBalance))
+        completion(NSDecimalNumber(decimal: Decimal(bitcoinBalance)).stringValue)
     }
     
     func userHasTransactions(completion: (Bool) -> Void) {
         completion(!transactions.isEmpty)
     }
     
+    func fetchMoreTransactions(completion: ([Transaction]) -> Void) {
+        guard let user = users.first else { return }
+        
+        let allTransactions = (user.transactions?.allObjects as? [Transaction])?.sorted(by: { $0.timeCreated ?? Date() > $1.timeCreated ?? Date() }) ?? []
+        
+        let startIndex = currentPage * pageSize
+        let endIndex = min(startIndex + pageSize, allTransactions.count)
+        
+        if startIndex < endIndex {
+            let newTransactions = Array(allTransactions[startIndex..<endIndex])
+            self.transactions.append(contentsOf: newTransactions)
+            currentPage += 1
+            completion(newTransactions)
+        } else {
+            completion([])
+        }
+    }
 }

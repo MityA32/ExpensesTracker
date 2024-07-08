@@ -83,12 +83,11 @@ final class TransactionsHistoryTableViewCell: UITableViewCell {
         else { return }
         switch type {
         case .incoming:
-            transactionValue.text = String(format: "%g", model.amount) + " BTC"
+            transactionValue.text = NSDecimalNumber(decimal: Decimal(model.amount)).stringValue + " BTC"
             transactionValue.textColor = .systemGreen
             
-            
         case .outgoing:
-            transactionValue.text = "-" + String(format: "%g", model.amount) + " BTC"
+            transactionValue.text = "-" + NSDecimalNumber(decimal: Decimal(model.amount)).stringValue + " BTC"
             transactionValue.textColor = .white
             transactionCategory.text = "Category: " + (model.category?.capitalized ?? "unknown")
         }

@@ -229,13 +229,18 @@ extension MainPageViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.allowsSelection = false
-        
+
+        loadMoreTransactions()
     }
 }
 
 extension MainPageViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        viewModel.groupedTransactions.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.transactions.count
+        viewModel.groupedTransactions[section].transactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -244,16 +249,51 @@ extension MainPageViewController: UITableViewDataSource, UITableViewDelegate {
                 withIdentifier: TransactionsHistoryTableViewCell.id,
                 for: indexPath
             ) as! TransactionsHistoryTableViewCell
-        cell.config(from: viewModel.transactions[indexPath.row])
+        let transaction = viewModel.groupedTransactions[indexPath.section].transactions[indexPath.row]
+        cell.config(from: transaction)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let date = viewModel.groupedTransactions[section].date
+        let calendar = Calendar.current
+        
+        if calendar.isDateInToday(date) {
+            return "Today"
+        } else if calendar.isDateInYesterday(date) {
+            return "Yesterday"
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            return dateFormatter.string(from: date)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == viewModel.groupedTransactions.count - 1 && indexPath.row == viewModel.groupedTransactions[indexPath.section].transactions.count - 1 {
+            loadMoreTransactions()
+        }
+    }
+    
+    private func loadMoreTransactions() {
+       viewModel.fetchMoreTransactions { [weak self] newTransactions in
+           guard let self else { return }
+           if !newTransactions.isEmpty {
+               let tableView = transactionsHistoryView.tableView
+               // for view like something loading
+               DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                   tableView.reloadData()
+               }
+           }
+       }
+   }
 }
 
 extension MainPageViewController: AddTransactionDelegate {
     func didAddTransaction(value: String, category: Category) {
         viewModel.addExpenseTransaction(transactionValue: value, for: category) { result in
             switch result {
-            case .success(let success):
+            case .success(_):
                 updateBalance()
                 updateTransactions()
                 dismiss(animated: true)
@@ -266,6 +306,4 @@ extension MainPageViewController: AddTransactionDelegate {
     func dismiss() {
         dismiss(animated: true)
     }
-    
-   
 }
