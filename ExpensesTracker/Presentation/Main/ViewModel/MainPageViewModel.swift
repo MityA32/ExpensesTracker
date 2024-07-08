@@ -15,6 +15,19 @@ final class MainPageViewModel {
     @Fetch var users: [User]
     var bitcoinBalance: Double = 0
     var transactions: [Transaction] = []
+    var currentPage = 0
+    let pageSize = 20
+    
+    var groupedTransactions: [(date: Date, transactions: [Transaction])] {
+        let calendar = Calendar.current
+        let grouped = Dictionary(grouping: transactions) { (transaction) -> Date in
+            return calendar.startOfDay(for: transaction.timeCreated ?? Date())
+        }
+        
+        return grouped.keys.sorted(by: >).map { (date) -> (date: Date, transactions: [Transaction]) in
+            return (date: date, transactions: grouped[date]!)
+        }
+    }
     
     init(exchangeRateModel: ExchangeRateModel, coredataService: CoreDataService) {
         self.exchangeRateModel = exchangeRateModel
@@ -129,4 +142,21 @@ final class MainPageViewModel {
         completion(!transactions.isEmpty)
     }
     
+    func fetchMoreTransactions(completion: @escaping ([Transaction]) -> Void) {
+            guard let user = users.first else { return }
+            
+            let allTransactions = (user.transactions?.allObjects as? [Transaction])?.sorted(by: { $0.timeCreated ?? Date() > $1.timeCreated ?? Date() }) ?? []
+            
+            let startIndex = currentPage * pageSize
+            let endIndex = min(startIndex + pageSize, allTransactions.count)
+            
+            if startIndex < endIndex {
+                let newTransactions = Array(allTransactions[startIndex..<endIndex])
+                self.transactions.append(contentsOf: newTransactions)
+                currentPage += 1
+                completion(newTransactions)
+            } else {
+                completion([])
+            }
+        }
 }

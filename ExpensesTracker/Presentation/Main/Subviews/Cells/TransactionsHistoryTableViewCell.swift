@@ -86,7 +86,6 @@ final class TransactionsHistoryTableViewCell: UITableViewCell {
             transactionValue.text = String(format: "%g", model.amount) + " BTC"
             transactionValue.textColor = .systemGreen
             
-            
         case .outgoing:
             transactionValue.text = "-" + String(format: "%g", model.amount) + " BTC"
             transactionValue.textColor = .white
